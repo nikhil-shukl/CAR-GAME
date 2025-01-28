@@ -160,3 +160,29 @@ function startGame() {
 }
 
 startGame();
+
+
+// Button event listeners for movement (Mouse + Touch Support)
+function addControlListeners(buttonId, direction) {
+  const button = document.getElementById(buttonId);
+  
+  button.addEventListener("mousedown", () => keysPressed[direction] = true);
+  button.addEventListener("mouseup", () => keysPressed[direction] = false);
+  button.addEventListener("mouseleave", () => keysPressed[direction] = false); // In case finger moves away
+
+  button.addEventListener("touchstart", (e) => {
+    e.preventDefault(); // Prevent default scrolling
+    keysPressed[direction] = true;
+  });
+
+  button.addEventListener("touchend", (e) => {
+    e.preventDefault();
+    keysPressed[direction] = false;
+  });
+}
+
+// Add event listeners to buttons
+addControlListeners("upBtn", "up");
+addControlListeners("downBtn", "down");
+addControlListeners("leftBtn", "left");
+addControlListeners("rightBtn", "right");
